@@ -1,0 +1,27 @@
+
+[tool.poetry]
+name = "langapp"
+version = "0.1.0"
+description = ""
+authors = ["David Zanger <davidzanger@t-online.de>"]
+readme = "README.md"
+repository = "https://gitlab.dlr.de/zang_da/language-app-backend"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pydantic = "^2.0.3"
+uvicorn = "^0.23.1"
+fastapi = "^0.100.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = ">=7.3.1"
+pytest-cov = ">=4.0.0"
+snakeviz = ">=2.1.2"
+tox = ">=4.4.12"
+pipreqs = ">=0.4.13"
+yapf = ">=0.33.0"
+pylint = ">=2.17.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
