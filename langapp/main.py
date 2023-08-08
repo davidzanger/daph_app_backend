@@ -1,5 +1,6 @@
 import json
 from typing import Any, Dict, List
+from langapp.gpt_generator import imagine_text
 
 import uvicorn
 from fastapi import FastAPI, Request
@@ -42,12 +43,26 @@ class GenerateTextRequest(BaseModel):
 
 @app.post("/generate_text/")
 async def create_item(item: GenerateTextRequest):
-    # TODO: @Philipp Your code goes here.
+
+    if item.difficulty is Difficulty.EASY:
+        difficulty_grammar = 0
+        difficulty_vocabulary = 0
+    elif item.difficulty is Difficulty.MEDIUM:
+        difficulty_grammar = 2
+        difficulty_vocabulary = 2
+    else:
+        difficulty_grammar = 5
+        difficulty_vocabulary = 5
+
+    item.generateText = imagine_text(difficulty_grammar=difficulty_grammar, difficulty_vocabulary=difficulty_vocabulary, n_words=item.textLength, topic='', considered_words=' '.join(item.words), language='english')
+
+
     return {"generatedText": f'{item}'}
 
 
 @app.get("/")
 async def root():
+
     return {"words": ['This text actually comes from a python backend!',]}
 
 
